@@ -1,5 +1,6 @@
 const baseConfig: Config = {
-  port: parseInt(process.env.PORT, 10) || 4000
+  port: parseInt(process.env.PORT, 10) || 4000,
+  serviceName: process.env.SERVICE_NAME || 'Seed Service'
 };
 
 export const config: EnvironmentConfig = {
@@ -18,4 +19,5 @@ export interface EnvironmentConfig {
 
 export interface Config {
   port: number;
+  serviceName: string;
 }

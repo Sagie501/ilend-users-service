@@ -9,6 +9,8 @@ const app = express();
 const server = new ApolloServer({ typeDefs: rootTypeDefs, resolvers: rootResolvers });
 server.applyMiddleware({ app });
 
-app.listen({port: Environment.getConfig().port}, () => {
-  console.log(`🚀 Server ready at http://localhost:${Environment.getConfig().port}${server.graphqlPath}`)
+const config = Environment.getConfig();
+
+app.listen({port: config.port}, () => {
+  console.log(`${config.serviceName} ready at port: ${config.port}`)
 });
