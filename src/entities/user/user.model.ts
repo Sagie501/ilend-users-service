@@ -1,16 +1,16 @@
 export interface User {
-  // id: string;
-  // firstName: string;
-  // lastName: string;
+  id: string;
+  firstName: string;
+  lastName: string;
   // gender: GenderEnum;
   // birthDate: Date;
-  // email: string;
-  // phoneNumber: string;
+  email: string;
+  phoneNumber: string;
   // country: string; // Maybe enum
   // city: string; // Maybe enum
   // street: string; // Maybe enum
-  // zipCode: number;
-  // isAdmin: boolean;
+  zipCode: number;
+  isAdmin: boolean;
   // favoriteCategories: Array<Category>;
   // products: Array<Product>;
   // wishList: Array<Product>;

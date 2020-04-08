@@ -2,8 +2,8 @@ import { UserConnector } from './user.connector';
 
 export const resolvers = {
   Query: {
-    users: async () => {
-      return await new UserConnector().getAllUsers()
+    getUsersById: async (source, args, context, info) => {
+      return await new UserConnector().getUserById(args.id)
     },
   },
 };
