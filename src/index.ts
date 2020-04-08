@@ -10,7 +10,7 @@ const server = new ApolloServer({ typeDefs: rootTypeDefs, resolvers: rootResolve
 server.applyMiddleware({ app });
 
 const config = Environment.getConfig();
-console.log('check');
+
 app.listen({port: config.port}, () => {
   console.log(`${config.serviceName} ready at port: ${config.port}`)
 });
