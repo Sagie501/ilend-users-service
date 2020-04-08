@@ -1,6 +1,6 @@
 import { typeDefs as booksTypeDefs } from '../entities/books-example/books.schema'
 import { typeDefs as usersTypeDefs } from '../entities/users-example/users.schema'
-import { gql } from 'apollo-server';
+import { gql } from 'apollo-server-express';
 
 export const root = gql`
   type Query {
