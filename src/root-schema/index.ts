@@ -1,5 +1,4 @@
-import { typeDefs as booksTypeDefs } from '../entities/books-example/books.schema'
-import { typeDefs as usersTypeDefs } from '../entities/users-example/users.schema'
+import { typeDefs as usersTypeDefs } from '../entities/user/user.schema'
 import { gql } from 'apollo-server-express';
 
 export const root = gql`
@@ -12,4 +11,4 @@ export const root = gql`
   }
 `;
 
-export const rootTypeDefs = [root, booksTypeDefs, usersTypeDefs];
+export const rootTypeDefs = [root, usersTypeDefs];

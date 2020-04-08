@@ -1,5 +1,7 @@
-export class UsersConnector {
-  users = [
+import { User } from './user.model';
+
+export class UserConnector {
+  users: User = [
     {
       name: 'Niv',
       age: 23
