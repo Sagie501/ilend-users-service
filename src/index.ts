@@ -12,6 +12,7 @@ server.applyMiddleware({ app });
 
 const config: Config = Environment.getConfig();
 
+
 app.listen({port: config.port}, () => {
   console.log(`${config.serviceName} ready at port: ${config.port}`)
 });
