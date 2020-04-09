@@ -1,4 +1,4 @@
-# UsersService
+# ILendUsersService
 
 This project is service that created with express and apollo-server.
 

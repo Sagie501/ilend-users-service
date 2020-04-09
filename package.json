@@ -1,5 +1,5 @@
 {
-  "name": "ilend-service-seed",
+  "name": "ilend-users-service",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
