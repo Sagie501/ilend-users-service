@@ -1,4 +1,5 @@
 import { typeDefs as usersTypeDefs } from '../entities/user/user.schema'
-import * as _ from 'lodash';
+import { mergeTypes } from 'merge-graphql-schemas';
+import { gql } from 'apollo-server-express';
 
-export const rootTypeDefs = _.merge(usersTypeDefs);
+export const rootTypeDefs = gql`${mergeTypes([usersTypeDefs])}`;
