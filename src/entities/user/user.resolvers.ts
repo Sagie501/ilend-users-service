@@ -1,8 +1,5 @@
 import { UserConnector } from './user.connector';
 
-const userConnector: UserConnector = new UserConnector();
-const getUserById = userConnector.getUserById;
-
 export const resolvers = {
   Query: {
     getUserById: async (source, args, context, info) => {
@@ -10,9 +7,8 @@ export const resolvers = {
     },
   },
   User: {
-    // TODO: Understand when needed
-    __resolveReference(user, { getUserById }){
-      return getUserById(user.id)
+    async __resolveReference(user) {
+      return await new UserConnector().getUserById(user.id)
     }
   }
 };
