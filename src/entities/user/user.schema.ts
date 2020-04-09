@@ -1,7 +1,7 @@
 import { gql } from 'apollo-server-express';
 
 export const typeDefs = gql`
-  type User {
+  type User @key(fields: "id") {
     id: ID!
     firstName: String
     lastName: String
@@ -17,6 +17,6 @@ export const typeDefs = gql`
   }
 
   extend type Query {
-    getUsersById(id: ID!): User
+    getUserById(id: ID!): User
   }
 `;

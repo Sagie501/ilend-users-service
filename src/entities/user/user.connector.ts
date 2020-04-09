@@ -34,7 +34,7 @@ export class UserConnector {
   async getUserById(id: string) {
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve(this.users[0]);
+        resolve(this.users.find((user) => user.id === id));
       }, 500);
     });
   }
