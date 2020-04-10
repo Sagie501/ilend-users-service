@@ -1,14 +1,5 @@
 import { typeDefs as usersTypeDefs } from '../entities/user/user.schema'
+import { mergeTypes } from 'merge-graphql-schemas';
 import { gql } from 'apollo-server-express';
 
-export const root = gql`
-  type Query {
-    root: String
-  }
-  
-  type Mutation {
-    root: String
-  }
-`;
-
-export const rootTypeDefs = [root, usersTypeDefs];
+export const rootTypeDefs = gql`${mergeTypes([usersTypeDefs])}`;

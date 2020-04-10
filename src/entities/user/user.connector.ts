@@ -1,41 +1,34 @@
 import { User } from './user.model';
+import Knex from 'knex';
 
 export class UserConnector {
-  users: Array<User> = [
-    {
-      id: '1',
-      firstName: 'Sagie',
-      lastName: 'Ivan',
-      isAdmin: true,
-      email: "bla1@gmail.com",
-      zipCode: 12345,
-      phoneNumber: "050-1234567"
-    },
-    {
-      id: '2',
-      firstName: 'Niv',
-      lastName: 'Hindi',
-      isAdmin: true,
-      email: "bla2@gmail.com",
-      zipCode: 12346,
-      phoneNumber: "050-1234568"
-    },
-    {
-      id: '3',
-      firstName: 'Tom',
-      lastName: 'Shushan',
-      isAdmin: true,
-      email: "bla3@gmail.com",
-      zipCode: 12347,
-      phoneNumber: "050-1234569"
-    }
-  ];
+  private knex: Knex<User>;
 
-  async getUserById(id: string) {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(this.users[0]);
-      }, 500);
+  constructor(knex: Knex<User>) {
+    this.knex = knex;
+  }
+
+  async getUserById(id: number): Promise<User> {
+    return this.knex.select('*').from('user').where({ id }).first();
+  }
+
+  async addUser(user: User) {
+    return this.knex.insert(user).into('user').then(([id]) => {
+      return this.getUserById(id);
+    }, (err) => {
+      throw new Error(err.sqlMessage);
     });
+  }
+
+  async removeUser(userId: number) {
+    return this.knex('user').where('id', userId).del().then((res) => {
+      if (res === 0) {
+        throw new Error(`The user with id: ${userId} not found`);
+      } else {
+        return true;
+      }
+    }, (err) => {
+      throw new Error(err.sqlMessage);
+    })
   }
 }

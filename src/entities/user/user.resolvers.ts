@@ -1,9 +1,20 @@
-import { UserConnector } from './user.connector';
-
 export const resolvers = {
   Query: {
-    getUsersById: async (source, args, context, info) => {
-      return await new UserConnector().getUserById(args.id)
+    getUserById: async (source, args, { dataSources }) => {
+      return await dataSources.usersDataSource.usersConnector.getUserById(args.id)
+    }
+  },
+  Mutation: {
+    addUser: async (source, args, { dataSources }) => {
+      return await dataSources.usersDataSource.usersConnector.addUser(args.user);
+    },
+    removeUser: async (source, args, { dataSources }) => {
+      return await dataSources.usersDataSource.usersConnector.removeUser(args.userId);
     },
   },
+  User: {
+    async __resolveReference(user, { dataSources }) {
+      return await dataSources.usersDataSource.usersConnector.getUserById(user.id)
+    }
+  }
 };
