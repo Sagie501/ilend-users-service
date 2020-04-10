@@ -8,6 +8,9 @@ export const resolvers = {
     addUser: async (source, args, { dataSources }) => {
       return await dataSources.usersDataSource.usersConnector.addUser(args.user);
     },
+    updateUser: async (source, args, { dataSources }) => {
+      return await dataSources.usersDataSource.usersConnector.updateUser(args.userId, args.user);
+    },
     removeUser: async (source, args, { dataSources }) => {
       return await dataSources.usersDataSource.usersConnector.removeUser(args.userId);
     },

@@ -9,7 +9,7 @@ export class UserConnector {
   }
 
   async login(email: string, password: string) {
-    return this.knex.select('*').from('user').where({email, password}).first();
+    return this.knex.select('*').from('user').where({ email, password }).first();
   }
 
   async getUserById(id: number) {
@@ -18,6 +18,14 @@ export class UserConnector {
 
   async addUser(user: User) {
     return this.knex.insert(user).into('user').then(([id]) => {
+      return this.getUserById(id);
+    }, (err) => {
+      throw new Error(err.sqlMessage);
+    });
+  }
+
+  async updateUser(userId: number, user: User) {
+    return this.knex('user').where({ id: userId }).update(user).then((id) => {
       return this.getUserById(id);
     }, (err) => {
       throw new Error(err.sqlMessage);
