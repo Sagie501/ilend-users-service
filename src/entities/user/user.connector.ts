@@ -19,4 +19,16 @@ export class UserConnector {
       throw new Error(err.sqlMessage);
     });
   }
+
+  async removeUser(userId: number) {
+    return this.knex('user').where('id', userId).del().then((res) => {
+      if (res === 0) {
+        throw new Error(`The user with id: ${userId} not found`);
+      } else {
+        return true;
+      }
+    }, (err) => {
+      throw new Error(err.sqlMessage);
+    })
+  }
 }

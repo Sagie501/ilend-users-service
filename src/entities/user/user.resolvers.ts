@@ -7,7 +7,10 @@ export const resolvers = {
   Mutation: {
     addUser: async (source, args, { dataSources }) => {
       return await dataSources.usersDataSource.usersConnector.addUser(args.user);
-    }
+    },
+    removeUser: async (source, args, { dataSources }) => {
+      return await dataSources.usersDataSource.usersConnector.removeUser(args.userId);
+    },
   },
   User: {
     async __resolveReference(user, { dataSources }) {

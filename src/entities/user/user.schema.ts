@@ -36,6 +36,7 @@ export const typeDefs = gql`
   }
   
   extend type Mutation {
-    addUser(user: UserInput): User
+    addUser(user: UserInput!): User
+    removeUser(userId: ID!): Boolean
   }
 `;
