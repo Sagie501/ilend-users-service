@@ -11,4 +11,5 @@ export interface User {
   street: string; // Maybe enum
   zipCode: number;
   isAdmin: boolean;
+  password: string;
 }
