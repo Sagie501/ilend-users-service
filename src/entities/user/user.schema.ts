@@ -32,7 +32,7 @@ export const typeDefs = gql`
   }
 
   extend type Query {
-    getUserById(id: ID!): User
+    login(email: String!, password: String!): User
   }
   
   extend type Mutation {

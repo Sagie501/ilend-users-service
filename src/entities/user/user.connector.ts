@@ -2,13 +2,17 @@ import { User } from './user.model';
 import Knex from 'knex';
 
 export class UserConnector {
-  private knex: Knex<User>;
+  private knex: Knex;
 
-  constructor(knex: Knex<User>) {
+  constructor(knex: Knex) {
     this.knex = knex;
   }
 
-  async getUserById(id: number): Promise<User> {
+  async login(email: string, password: string) {
+    return this.knex.select('*').from('user').where({email, password}).first();
+  }
+
+  async getUserById(id: number) {
     return this.knex.select('*').from('user').where({ id }).first();
   }
 
