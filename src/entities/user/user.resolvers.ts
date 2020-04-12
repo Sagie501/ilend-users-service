@@ -16,7 +16,7 @@ export const resolvers = {
     },
   },
   User: {
-    async __resolveReference(user, { dataSources }) {
+    __resolveReference: async (user, { dataSources }) => {
       return await dataSources.usersDataSource.usersConnector.getUserById(user.id)
     }
   }
