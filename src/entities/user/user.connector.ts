@@ -9,6 +9,7 @@ export class UserConnector {
   }
 
   async login(email: string, password: string) {
+    email = email.toLowerCase();
     return this.knex.select('*').from('user').where({ email, password }).first();
   }
 
@@ -17,6 +18,7 @@ export class UserConnector {
   }
 
   async addUser(user: User) {
+    user.email = user.email.toLowerCase();
     return this.knex.insert(user).into('user').then(([id]) => {
       return this.getUserById(id);
     }, (err) => {
