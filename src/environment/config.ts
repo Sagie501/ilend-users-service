@@ -19,7 +19,16 @@ export const config: EnvironmentConfig = {
     ...baseConfig
   },
   prod: {
-    ...baseConfig
+    ...baseConfig,
+    dbConfig: {
+      client: process.env.DB_CLIENT || 'mysql',
+      connection: {
+        host : process.env.DB_HOST || '193.106.55.108',
+        user : process.env.DB_USER || 'root',
+        password : process.env.DB_PASSWORD || 'bartar@CS806',
+        database : process.env.DB_SCHEMA || 'ilend'
+      }
+    }
   }
 };
 
