@@ -1,14 +1,16 @@
+import { Gender } from '../../enums/gender/gender.enum';
+
 export interface User {
   id: string;
   firstName: string;
   lastName: string;
-  gender: string; // Maybe enum
+  gender: Gender;
   birthDate: Date;
   email: string;
   phoneNumber: string;
-  country: string; // Maybe enum
-  city: string; // Maybe enum
-  street: string; // Maybe enum
+  country: string;
+  city: string;
+  street: string;
   zipCode: number;
   isAdmin: boolean;
   password: string;

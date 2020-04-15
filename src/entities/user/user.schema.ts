@@ -1,13 +1,12 @@
 import { gql } from 'apollo-server-express';
 
-// TODO: Handle birthDate
 export const typeDefs = gql`
   type User @key(fields: "id") {
     id: ID!
     firstName: String
     lastName: String
-    gender: String
-    # birthDate
+    gender: Gender
+    birthDate: Long
     email: String
     phoneNumber: String
     country: String
@@ -20,8 +19,8 @@ export const typeDefs = gql`
   input UserInput {
     firstName: String
     lastName: String
-    gender: String
-    # birthDate
+    gender: Gender
+    birthDate: Long
     email: String
     phoneNumber: String
     country: String
