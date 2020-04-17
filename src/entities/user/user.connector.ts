@@ -1,5 +1,6 @@
 import { User } from './user.model';
 import Knex from 'knex';
+import { AuthenticationError } from 'apollo-server-express';
 
 export class UserConnector {
   private knex: Knex;
@@ -10,7 +11,19 @@ export class UserConnector {
 
   async login(email: string, password: string) {
     email = email.toLowerCase();
-    return this.knex.select('*').from('user').where({ email, password }).first();
+    return this.knex.select('*').from('user').where({ email, password }).first().then((res) => {
+      if (!res) {
+        return this.knex.select('*').from('user').where({ email }).first().then((res) => {
+          if (!res) {
+            throw new AuthenticationError('Login failed, wrong email');
+          } else {
+            throw new AuthenticationError('Login failed, wrong password');
+          }
+        });
+      } else {
+        return res;
+      }
+    });
   }
 
   async getUserById(id: number) {
