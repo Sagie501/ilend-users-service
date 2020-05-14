@@ -40,6 +40,9 @@ export class UserConnector {
   }
 
   async updateUser(userId: number, user: User) {
+    if (user.email) {
+      user.email = user.email.toLowerCase();
+    }
     return this.knex('user').where({ id: userId }).update(user).then((id) => {
       return this.getUserById(id);
     }, (err) => {
