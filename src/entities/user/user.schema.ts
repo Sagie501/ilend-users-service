@@ -14,6 +14,7 @@ export const typeDefs = gql`
     street: String
     zipCode: Int
     isAdmin: Boolean
+    password: String
   }
   
   input UserInput {
