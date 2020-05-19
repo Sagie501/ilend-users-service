@@ -2,6 +2,9 @@ export const resolvers = {
   Query: {
     login: async (source, args, { dataSources }) => {
       return await dataSources.usersDataSource.usersConnector.login(args.email, args.password);
+    },
+    getAllUsers: async (source, args, { dataSources }) => {
+      return await dataSources.usersDataSource.usersConnector.getAllUsers();
     }
   },
   Mutation: {

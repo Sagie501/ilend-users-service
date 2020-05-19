@@ -33,6 +33,7 @@ export const typeDefs = gql`
 
   extend type Query {
     login(email: String!, password: String!): User
+    getAllUsers: [User]
   }
   
   extend type Mutation {

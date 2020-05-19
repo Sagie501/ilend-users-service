@@ -26,6 +26,10 @@ export class UserConnector {
     });
   }
 
+  async getAllUsers() {
+    return this.knex.select('*').from('user');
+  }
+
   async getUserById(id: number) {
     return this.knex.select('*').from('user').where({ id }).first();
   }
@@ -43,8 +47,8 @@ export class UserConnector {
     if (user.email) {
       user.email = user.email.toLowerCase();
     }
-    return this.knex('user').where({ id: userId }).update(user).then((id) => {
-      return this.getUserById(id);
+    return this.knex('user').where({ id: userId }).update(user).then(() => {
+      return this.getUserById(userId);
     }, (err) => {
       throw new Error(err.sqlMessage);
     });
