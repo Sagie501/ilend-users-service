@@ -14,5 +14,5 @@ export interface User {
   zipCode: number;
   isAdmin: boolean;
   password: string;
-  profilePicture: string;
+  profilePicture?: string;
 }

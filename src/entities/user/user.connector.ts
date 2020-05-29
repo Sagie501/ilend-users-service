@@ -51,25 +51,27 @@ export class UserConnector {
 
     user.email = user.email.toLowerCase();
 
-    let promises = [];
-    promises.push(
-      axios.post(
-        imgurConfig.url,
-        {
-          image: user.profilePicture,
-        },
-        {
-          headers: {
-            Authorization: `Client-ID ${imgurConfig.clientId}`,
+    if (user.profilePicture) {
+      let promises = [];
+      promises.push(
+        axios.post(
+          imgurConfig.url,
+          {
+            image: user.profilePicture,
           },
-        }
-      )
-    );
+          {
+            headers: {
+              Authorization: `Client-ID ${imgurConfig.clientId}`,
+            },
+          }
+        )
+      );
 
-    let imgurResult = await Promise.all(promises);
-    user.profilePicture = JSON.stringify(
-      imgurResult.map((res) => res.data.data.link)
-    );
+      let imgurResult = await Promise.all(promises);
+      user.profilePicture = JSON.stringify(
+        imgurResult.map((res) => res.data.data.link)
+      );
+    }
 
     return this.knex
       .insert(user)
