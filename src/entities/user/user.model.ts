@@ -1,4 +1,4 @@
-import { Gender } from '../../enums/gender/gender.enum';
+import { Gender } from "../../enums/gender/gender.enum";
 
 export interface User {
   id: string;
@@ -14,4 +14,5 @@ export interface User {
   zipCode: number;
   isAdmin: boolean;
   password: string;
+  profilePicture: string;
 }
