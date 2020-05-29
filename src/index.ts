@@ -11,6 +11,8 @@ const app = express();
 
 const config: Config = Environment.getConfig();
 
+app.use(express.json({limit: Infinity}));
+
 const usersDataSource = new UserDataSource(config.dbConfig);
 
 const server = new ApolloServer({
