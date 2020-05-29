@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server-express';
+import { gql } from "apollo-server-express";
 
 export const typeDefs = gql`
   type User @key(fields: "id") {
@@ -15,8 +15,9 @@ export const typeDefs = gql`
     zipCode: Int
     isAdmin: Boolean
     password: String
+    profilePicture: String
   }
-  
+
   input UserInput {
     firstName: String
     lastName: String
@@ -29,13 +30,14 @@ export const typeDefs = gql`
     street: String
     zipCode: Int
     password: String
+    profilePicture: String
   }
 
   extend type Query {
     login(email: String!, password: String!): User
     getAllUsers: [User]
   }
-  
+
   extend type Mutation {
     addUser(user: UserInput!): User
     updateUser(userId: ID!, user: UserInput!): User
