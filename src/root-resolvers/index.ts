@@ -1,4 +1,4 @@
 import { resolvers as usersResolver } from '../entities/user/user.resolvers'
-import * as _ from 'lodash';
+import { mergeResolvers } from '@graphql-tools/merge';
 
-export const rootResolvers = _.merge(usersResolver);
+export const rootResolvers = mergeResolvers([usersResolver]);
