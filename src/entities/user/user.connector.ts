@@ -85,10 +85,8 @@ export class UserConnector {
     );
 
     let imgurResult = await Promise.all(promises);
-    user.profilePicture = JSON.stringify(
-      imgurResult.map((res) => res.data.data.link)
-    );
-    user.profilePicture = user.profilePicture[0];
+    let profilePictures = imgurResult.map((res) => res.data.data.link);
+    user.profilePicture = profilePictures[0];
   }
 
   async updateUser(userId: number, user: User) {
