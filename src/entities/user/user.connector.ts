@@ -47,30 +47,10 @@ export class UserConnector {
   }
 
   async addUser(user: User) {
-    let imgurConfig = Environment.getConfig().imgurConfig;
-
     user.email = user.email.toLowerCase();
 
     if (user.profilePicture) {
-      let promises = [];
-      promises.push(
-        axios.post(
-          imgurConfig.url,
-          {
-            image: user.profilePicture,
-          },
-          {
-            headers: {
-              Authorization: `Client-ID ${imgurConfig.clientId}`,
-            },
-          }
-        )
-      );
-
-      let imgurResult = await Promise.all(promises);
-      user.profilePicture = JSON.stringify(
-        imgurResult.map((res) => res.data.data.link)
-      );
+      this.uploadImage(user);
     }
 
     return this.knex
@@ -86,10 +66,38 @@ export class UserConnector {
       );
   }
 
+  async uploadImage(user: User) {
+    let imgurConfig = Environment.getConfig().imgurConfig;
+
+    let promises = [];
+    promises.push(
+      axios.post(
+        imgurConfig.url,
+        {
+          image: user.profilePicture,
+        },
+        {
+          headers: {
+            Authorization: `Client-ID ${imgurConfig.clientId}`,
+          },
+        }
+      )
+    );
+
+    let imgurResult = await Promise.all(promises);
+    let profilePictures = imgurResult.map((res) => res.data.data.link);
+    user.profilePicture = profilePictures[0];
+  }
+
   async updateUser(userId: number, user: User) {
     if (user.email) {
       user.email = user.email.toLowerCase();
     }
+
+    if (user.profilePicture) {
+      await this.uploadImage(user);
+    }
+
     return this.knex("user")
       .where({ id: userId })
       .update(user)
