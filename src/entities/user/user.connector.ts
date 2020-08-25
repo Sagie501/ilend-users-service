@@ -50,8 +50,7 @@ export class UserConnector {
     user.email = user.email.toLowerCase();
 
     if (user.profilePicture) {
-      console.log(user.profilePicture);
-      this.uploadImage(user);
+      await this.uploadImage(user);
     }
 
     return this.knex
@@ -87,9 +86,7 @@ export class UserConnector {
 
     let imgurResult = await Promise.all(promises);
     let profilePictures = imgurResult.map((res) => res.data.data.link);
-    console.log("ALL PICTURES: ", profilePictures);
     user.profilePicture = profilePictures[0];
-    console.log(user.profilePicture);
   }
 
   async updateUser(userId: number, user: User) {
